@@ -1,5 +1,6 @@
-<div>
+<div *ngIf="modelsReady">
   <video
+    class="video"
     [style.width]="width + 'px'"
     [style.height]="height + 'px'"
     #videoElement
