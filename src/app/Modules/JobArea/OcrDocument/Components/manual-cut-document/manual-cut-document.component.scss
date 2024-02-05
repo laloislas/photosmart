@@ -1,0 +1,15 @@
+.manual__cut__container{
+  width: 400px;
+  height: 700px;
+  position: relative;
+  img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  canvas{
+    position: absolute;
+    width: 400px;
+    height: 700px;
+  }
+}

@@ -1,0 +1,79 @@
+<div class="videoCheck">
+  <div
+    class="videoCheck__container"
+    [style.width]="width + 'px'"
+    [style.height]="height + 'px'"
+  >
+    <!--Si no hay foto-->
+    <ng-container *ngIf="cameraAllow">
+      <div
+        class="videoCheck__container__video"
+        [style.width]="width - 50 + 'px'"
+        [style.height]="height + 'px'"
+        [ngStyle]="{
+          border: capturedImage
+            ? 'none'
+            : scoreFace
+            ? '5px dashed #53e946fa'
+            : '5px dashed #ec0000'
+        }"
+      >
+        <ngx-video-player
+          [stream]="currentStream"
+          [width]="width * 2"
+          [height]="height"
+          [onlyMovil]="false"
+          (foundFace)="foundFace($event)"
+          class="videoCheck__container__video__center"
+          [style.display]="capturedImage ? 'none' : 'flex'"
+        ></ngx-video-player>
+
+        <ng-container [style.display]="capturedImage ? 'flex' : 'none'">
+          <img
+            [src]="capturedImage"
+            alt=""
+            [style.width]="width * 2 + 'px'"
+            [style.height]="height + 'px'"
+            [height]="height"
+          />
+        </ng-container>
+      </div>
+    </ng-container>
+    <!--Contador-->
+    <ng-container *ngIf="scoreFace && !capturedImage">
+      <div
+        class="videoCheck__cointainer__conunter"
+        [style.width]="width - 50 + 'px'"
+        [style.height]="height + 'px'"
+      >
+        <span>{{ counter }}</span>
+      </div>
+    </ng-container>
+  </div>
+  <!--Instrucciones-->
+  <ng-container *ngIf="cameraAllow">
+    <div class="videoCheck__instruccion">
+      <ng-container *ngIf="!capturedImage">
+        <ng-container *ngIf="scoreFace">
+          <h1>no se mueva</h1>
+        </ng-container>
+        <ng-container *ngIf="!scoreFace">
+          <h3>Centre su rostro hasta que el marco se encuentre en verde</h3>
+        </ng-container>
+      </ng-container>
+
+      <ng-container *ngIf="capturedImage && actionSection">
+        <h3>Fotografía capturada</h3>
+        <div
+          class="videoCheck__instruccion__button"
+          (click)="reintentCapture()"
+        >
+          Reintentar
+        </div>
+        <div class="videoCheck__instruccion__button" (click)="saveCapture()">
+          Guardar
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

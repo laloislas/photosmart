@@ -1,0 +1,17 @@
+<ng-container *ngIf="videoPlayerView">
+  <ng-container *ngIf="modelsReady">
+    <video
+
+      [style.height]="'auto'"
+
+      #videoElement
+      *ngIf="stream"
+      [srcObject]="stream"
+      (loadedmetadata)="loadMetaData()"
+      (play)="listenerPlay()"
+      webkit-playsinline
+      playsinline
+      class="video"
+    ></video>
+  </ng-container>
+</ng-container>

@@ -1,0 +1,31 @@
+<div class="videoCheck">
+  <div
+    class="videoCheck__container"
+    [style.width]="width + 'px'"
+    [style.height]="height + 'px'"
+  >
+    <div
+      class="videoCheck__container__video"
+      [style.width]="width - 50 + 'px'"
+      [style.height]="height + 'px'"
+    >
+      <webcam
+        [height]="width * 2"
+        [width]="height * 2"
+        [trigger]="triggerObservable"
+        (imageCapture)="handleImage($event)"
+        *ngIf="showWebcam"
+        [allowCameraSwitch]="allowCameraSwitch"
+        [switchCamera]="nextWebcamObservable"
+        [videoOptions]="videoOptions"
+        [imageQuality]="1"
+        (cameraSwitched)="cameraWasSwitched($event)"
+        (initError)="handleInitError($event)"
+      ></webcam>
+
+    </div>
+    <button class="actionBtn" (click)="triggerSnapshot()">
+      Take A Snapshot
+    </button>
+  </div>
+</div>
